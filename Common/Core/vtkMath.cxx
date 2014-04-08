@@ -618,11 +618,11 @@ void vtkMath::LUSolveLinearSystem(double **A, int *index,
 #define VTK_ROTATE(a,i,j,k,l) g=a[i][j];h=a[k][l];a[i][j]=g-s*(h+g*tau);\
         a[k][l]=h+s*(g-h*tau)
 
-#define VTK_MAX_ROTATIONS 20
+//#define VTK_MAX_ROTATIONS 20
 
 //#undef VTK_MAX_ROTATIONS
 
-//#define VTK_MAX_ROTATIONS 50
+#define VTK_MAX_ROTATIONS 50
 
 // Jacobi iteration for the solution of eigenvectors/eigenvalues of a nxn
 // real symmetric matrix. Square nxn matrix a; size of matrix in n;
@@ -756,11 +756,11 @@ int vtkJacobiN(T **a, int n, T *w, T **v)
 
   //// this is NEVER called
   if ( i >= VTK_MAX_ROTATIONS )
-    {
-    vtkGenericWarningMacro(
-       "vtkMath::Jacobi: Error extracting eigenfunctions");
-    return 0;
-    }
+  {
+      vtkGenericWarningMacro(
+                  "vtkMath::Jacobi: Error extracting eigenfunctions");
+      return 0;
+  }
 
   // sort eigenfunctions                 these changes do not affect accuracy
   for (j=0; j<n-1; j++)                  // boundary incorrect
